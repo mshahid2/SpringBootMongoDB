@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: RestMongoDB
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Owner
+Implementation-Vendor-Id: com.xav
+Build-Jdk: 1.8.0_121
+Implementation-URL: http://projects.spring.io/spring-boot/SpringBootMo
+ ngoDB/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+

@@ -10,10 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xav.bean.User;
+import com.xav.bean.drillDown.DrillDown;
 import com.xav.chart.ChartData;
 import com.xav.chart.DataProvider;
 import com.xav.chart.Images;
 import com.xav.chart.Pie;
+import com.xav.chart.callDataDetail;
+import com.xav.service.CallDataDetailService;
+import com.xav.service.ChartDataService;
 import com.xav.service.UserService;
 /**
  * 
@@ -22,13 +26,21 @@ import com.xav.service.UserService;
  */
 @RestController
 public class UserController {
+	
+
 
 	@Autowired
 	UserService userService;
 
-	@CrossOrigin(origins = "http://localhost:4200")
+	@Autowired
+	ChartDataService chartDataService;
+	
+	@Autowired
+	CallDataDetailService callDataDetailService;
+
+	@CrossOrigin(origins="https://angular4-project-heathenish-subconnation.cfapps.io")
 	@RequestMapping("/getUser/{email}")
-	public User getUsers(@PathVariable final String email)
+	public User getUsers(@PathVariable String email)
 	{
 		User user1 = null;
 		System.out.println("Method Called as service.");
@@ -40,16 +52,21 @@ public class UserController {
 		return user1;
 	}
 
+	@CrossOrigin(origins="https://angular4-project-heathenish-subconnation.cfapps.io")
 	@RequestMapping("getUserByRole/{roleName}")
-	public List<User> getUserByRole(@PathVariable final String roleName)
+	public List<User> getUserByRole(@PathVariable String roleName)
 	{
 		List<User> user = userService.getUserByRole(roleName);
 		return user;
 
 	}
-	@CrossOrigin(origins = "http://127.0.0.1:51419")
+	@CrossOrigin(origins = "https://xavient.cfapps.io")
 	@RequestMapping("getChartData")
 	public ChartData getChartData(){
+		
+		ChartData lstData =chartDataService.getDatByMap("usa2Low");
+		System.out.println("lstData Size : " + lstData);
+		
 		
 		Images[] imgArray = new Images[1];
 		ChartData cd = new ChartData();
@@ -93,8 +110,34 @@ public class UserController {
 		//cd.setMap("continentsLow");
 		//cd.setMap("usaLow");
 		cd.setMap("usa2Low");
-		return cd;
+		//return cd;
+		return lstData;
 		
 	}
+	@CrossOrigin(origins = "https://xavient.cfapps.io")
+	@RequestMapping("/getChartDataNormalied")
+	ChartData getChartDataNormalied()
+	{
+		
+		return null;
+	}
+	
+	@CrossOrigin(origins="https://xavient.cfapps.io")
+	@RequestMapping("/calDataDetail/{location}")
+	List<callDataDetail> callDataDetail(@PathVariable String location)
+	{
+		List<callDataDetail> lstDetail = callDataDetailService.getCallDetailByLocation(location);
+		return lstDetail;
+	}
+	
+	@CrossOrigin(origins="https://xavient.cfapps.io")
+	@RequestMapping("/getBarCharData")
+	public List<DrillDown> getDrillDownData()
+	{
+		List<DrillDown> lstDrillDown =callDataDetailService.getDrillDownDetailForALocation("");
+		return lstDrillDown;
+				
+	}
+
 
 }

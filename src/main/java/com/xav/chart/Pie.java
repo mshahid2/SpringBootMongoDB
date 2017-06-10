@@ -14,8 +14,19 @@ public class Pie {
     private String pullOutRadius;
 
     private String labelRadius;
+    
+    private String colorField;
 
-    public String getLabelText ()
+
+    public String getColorField() {
+		return colorField;
+	}
+
+	public void setColorField(String colorField) {
+		this.colorField = colorField;
+	}
+
+	public String getLabelText ()
     {
         return labelText;
     }

@@ -4,8 +4,18 @@ public class DataProvider {
 	private String category;
 
     private String value;
+    
+    private String color;
+    
+    public String getColor() {
+		return color;
+	}
 
-    public String getCategory ()
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public String getCategory ()
     {
         return category;
     }
